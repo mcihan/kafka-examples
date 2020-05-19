@@ -14,6 +14,7 @@
 
     <modules>
         <module>kafka-request-reply</module>
+        <module>kafka-producer-consumer</module>
     </modules>
 
     <build>
