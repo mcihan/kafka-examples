@@ -1,6 +1,7 @@
 package com.cihan.kafkaproducerconsumer.config;
 
 
+import com.cihan.kafkaproducerconsumer.controller.AccountSummaryMessage;
 import com.cihan.kafkaproducerconsumer.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
@@ -27,30 +28,13 @@ public class KafkaConfiguration {
 
 
     @Bean
-    public Map<String, Object> consumerConfigs() {
-        return new HashMap<>(kafkaProperties.buildConsumerProperties());
-    }
-
-    @Bean
-    public ProducerFactory<String, User> producerFactory() {
+    public ProducerFactory<String, AccountSummaryMessage> producerFactory() {
         return new DefaultKafkaProducerFactory<>(producerConfigs());
     }
 
-    @Bean
-    public ConsumerFactory<String, User> consumerFactory() {
-        return new DefaultKafkaConsumerFactory<>(consumerConfigs());
-    }
 
     @Bean
-    public KafkaTemplate<String, User> kafkaTemplate() {
+    public KafkaTemplate<String, AccountSummaryMessage> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
-    }
-
-    @Bean
-    public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, User>> kafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, User> factory = new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(consumerFactory());
-        factory.setReplyTemplate(kafkaTemplate());
-        return factory;
     }
 }

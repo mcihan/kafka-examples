@@ -1,6 +1,6 @@
 spring:
   kafka:
-    bootstrap-servers: kafka:9092
+    bootstrap-servers: localhost:9092
     producer:
       auto-offset-reset: earliest
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
@@ -15,4 +15,5 @@ spring:
             value:
               default:
                 type: com.cihan.kafkarequestreply.model.User
-
+server:
+  port: 8081

@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @AllArgsConstructor
 public class UserProduceController {
-    private final KafkaTemplate<String, User> kafkaTemplate;
+    private final KafkaTemplate<String, AccountSummaryMessage> kafkaTemplate;
 
     @ResponseBody
     @PostMapping(value = "/produce-user", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void produce(@RequestBody User user) {
-        kafkaTemplate.send("USER_TOPIC", user);
+    public void produce(@RequestBody AccountSummaryMessage accountSummaryMessage) {
+        kafkaTemplate.send("ACCOUNT_SUMMARY", accountSummaryMessage);
     }
 
 }
